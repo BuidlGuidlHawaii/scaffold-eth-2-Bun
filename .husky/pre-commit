@@ -1,1 +1,13 @@
-yarn lint-staged --verbose
+#!/usr/bin/env sh
+
+# Format all staged files
+git diff --cached --name-only --diff-filter=ACMR | grep -E "\.(ts|tsx|js|jsx|json|md)$" | xargs -r prettier --write
+
+# Run Next.js lint in its directory
+cd packages/nextjs && bun lint || exit 1
+
+# Run Hardhat lint in its directory
+cd ../hardhat && bun lint || exit 1
+
+# Add back the formatted files
+git add .

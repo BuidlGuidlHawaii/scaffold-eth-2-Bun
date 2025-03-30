@@ -1,21 +1,28 @@
 const path = require("path");
 
-const buildNextEslintCommand = (filenames) =>
-  `yarn next:lint --fix --file ${filenames
-    .map((f) => path.relative(path.join("packages", "nextjs"), f))
-    .join(" --file ")}`;
-
-const checkTypesNextCommand = () => "yarn next:check-types";
-
-const buildHardhatEslintCommand = (filenames) =>
-  `yarn hardhat:lint-staged --fix ${filenames
-    .map((f) => path.relative(path.join("packages", "hardhat"), f))
-    .join(" ")}`;
+const buildEslintCommand = (files, cwd) => {
+  const relativePaths = files.map((f) =>
+    path.relative(cwd, f).split(path.sep).join("/")
+  );
+  // Use PowerShell commands for Windows
+  return `powershell -Command "Set-Location '${cwd}'; bun lint --fix ${relativePaths.map((f) => `'${f}'`).join(" ")}"`;
+};
 
 module.exports = {
-  "packages/nextjs/**/*.{ts,tsx}": [
-    buildNextEslintCommand,
-    checkTypesNextCommand,
+  "packages/nextjs/**/*.{ts,tsx}": (filenames) => [
+    `prettier --write ${filenames.map((f) => `'${f}'`).join(" ")}`,
+    buildEslintCommand(
+      filenames,
+      path.resolve(process.cwd(), "packages/nextjs")
+    ),
   ],
-  "packages/hardhat/**/*.{ts,tsx}": [buildHardhatEslintCommand],
+  "packages/hardhat/**/*.{ts,tsx}": (filenames) => [
+    `prettier --write ${filenames.map((f) => `'${f}'`).join(" ")}`,
+    buildEslintCommand(
+      filenames,
+      path.resolve(process.cwd(), "packages/hardhat")
+    ),
+  ],
+  "**/*.{md,json}": (filenames) =>
+    `prettier --write ${filenames.map((f) => `'${f}'`).join(" ")}`,
 };
