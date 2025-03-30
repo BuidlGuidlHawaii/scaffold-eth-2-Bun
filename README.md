@@ -1,13 +1,13 @@
-# 🏗 Scaffold-ETH 2
+# 🏗 Scaffold-ETH 2 (Bun Edition)
 
 <h4 align="center">
   <a href="https://docs.scaffoldeth.io">Documentation</a> |
   <a href="https://scaffoldeth.io">Website</a>
 </h4>
 
-🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. It's designed to make it easier for developers to create and deploy smart contracts and build user interfaces that interact with those contracts.
+🧪 An open-source, up-to-date toolkit for building decentralized applications (dapps) on the Ethereum blockchain. This is the Bun-based version of Scaffold-ETH 2, offering faster performance and better developer experience.
 
-⚙️ Built using NextJS, RainbowKit, Foundry/Hardhat, Wagmi, Viem, and Typescript.
+⚙️ Built using NextJS, RainbowKit, Foundry/Hardhat, Wagmi, Viem, Typescript, and Bun.
 
 - ✅ **Contract Hot Reload**: Your frontend auto-adapts to your smart contract as you edit it.
 - 🪝 **[Custom hooks](https://docs.scaffoldeth.io/hooks/)**: Collection of React hooks wrapper around [wagmi](https://wagmi.sh/) to simplify interactions with smart contracts with typescript autocompletion.
@@ -21,45 +21,47 @@
 
 Before you begin, you need to install the following tools:
 
-- [Node (>= v20.18.3)](https://nodejs.org/en/download/)
-- Yarn ([v1](https://classic.yarnpkg.com/en/docs/install/) or [v2+](https://yarnpkg.com/getting-started/install))
+- [Bun (>= v1.2.4)](https://bun.sh)
+- [Node (>= v20.18.3)](https://nodejs.org/en/download/) (required for some dependencies)
 - [Git](https://git-scm.com/downloads)
 
 ## Quickstart
 
-To get started with Scaffold-ETH 2, follow the steps below:
+To get started with Scaffold-ETH 2 (Bun Edition), follow the steps below:
 
-1. Install the latest version of Scaffold-ETH 2
+1. Clone this repository:
 
+```bash
+git clone https://github.com/scaffold-eth/scaffold-eth-2-Bun.git
+cd scaffold-eth-2-Bun
 ```
-npx create-eth@latest
+
+2. Install dependencies:
+
+```bash
+bun install
 ```
 
-This command will install all the necessary packages and dependencies, so it might take a while.
+3. Run a local network in the first terminal:
 
-> [!NOTE]
-> You can also initialize your project with one of our extensions to add specific features or starter-kits. Learn more in our [extensions documentation](https://docs.scaffoldeth.io/extensions/).
-
-2. Run a local network in the first terminal:
-
-```
-yarn chain
+```bash
+bun chain
 ```
 
 This command starts a local Ethereum network that runs on your local machine and can be used for testing and development. Learn how to [customize your network configuration](https://docs.scaffoldeth.io/quick-start/environment#1-initialize-a-local-blockchain).
 
-3. On a second terminal, deploy the test contract:
+4. On a second terminal, deploy the test contract:
 
-```
-yarn deploy
+```bash
+bun run deploy
 ```
 
 This command deploys a test smart contract to the local network. You can find more information about how to customize your contract and deployment script in our [documentation](https://docs.scaffoldeth.io/quick-start/environment#2-deploy-your-smart-contract).
 
-4. On a third terminal, start your NextJS app:
+5. On a third terminal, start your NextJS app:
 
-```
-yarn start
+```bash
+bun start
 ```
 
 Visit your app on: `http://localhost:3000`. You can interact with your smart contract using the `Debug Contracts` page. You can tweak the app config in `packages/nextjs/scaffold.config.ts`.
@@ -74,6 +76,18 @@ Visit the [What's next section of our docs](https://docs.scaffoldeth.io/quick-st
 - Edit the app config
 - Writing and running tests
 - [Setting up external services and API keys](https://docs.scaffoldeth.io/deploying/deploy-smart-contracts#configuration-of-third-party-services-for-production-grade-apps)
+
+## Available Scripts
+
+- `bun chain` - Start a local blockchain
+- `bun deploy` - Deploy contracts
+- `bun start` - Start the NextJS app
+- `bun test` - Run tests
+- `bun compile` - Compile contracts
+- `bun format` - Format code
+- `bun lint` - Lint code
+- `bun account` - Generate or import accounts
+- `bun verify` - Verify contracts on Etherscan
 
 ## Documentation
 
